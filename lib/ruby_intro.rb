@@ -4,24 +4,38 @@
 
 def sum arr
   # YOUR CODE HERE
+  
+  summation = arr.sum
+  return summation
 end
 
 def max_2_sum arr
-  # YOUR CODE HERE
+  return 0 if arr.length() == 0
+    
+  
+  arr.max(2).reduce(:+)
 end
 
 def sum_to_n? arr, n
-  # YOUR CODE HERE
+  return false if arr.length() == 0
+
+  !!arr.combination(2).detect { |a,b| a + b == n}
 end
 
 # Part 2
 
 def hello(name)
-  # YOUR CODE HERE
+  return "Hello, #{name}"
 end
 
 def starts_with_consonant? s
-  # YOUR CODE HERE
+  
+  if s.is_a? String
+    down_s = s.downcase
+    ["a", "e", "i", "o", "u"].include?(down_s[0]) || down_s.length() == 0 || !down_s.match?(/^[[:alpha:]]+$/) ? false : true 
+  else
+    return false
+  end
 end
 
 def binary_multiple_of_4? s
@@ -31,5 +45,37 @@ end
 # Part 3
 
 class BookInStock
-# YOUR CODE HERE
+  attr_accessor :isbn
+  attr_accessor :price
+  def initialize(isbn, price)
+    # if isbn == "" || price < 0
+    #   raise ArgumentError.new("ERROR") 
+    # end 
+    self.isbn = isbn
+    self.price = price
+  end
+
+  def isbn=(isbn)
+    if isbn == ""
+      raise ArgumentError.new("ERROR, isbn can't be empty string")
+    end
+    @isbn = isbn
+  end
+
+  def price=(price)
+    if price <= 0
+      raise ArgumentError.new("ERROR, price can't be less than zero")
+    end
+    @price = price
+  end
+
+  def price_as_string(price=@price)
+    
+    string_price = "$#{'%.2f' % price}"
+    return string_price
+  end
 end
+
+
+book = BookInStock.new("sdfsdf", 23.3)
+puts book.price_as_string
