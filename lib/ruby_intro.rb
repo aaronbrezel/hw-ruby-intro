@@ -39,7 +39,20 @@ def starts_with_consonant? s
 end
 
 def binary_multiple_of_4? s
-  # YOUR CODE HERE
+  two_power = 0
+  total = 0
+
+  if s.is_a? String and s.chars.all? {|x| x =~ /[01]/} and s.length > 0
+    digits = s.chars.reverse
+    digits.each do |digit|
+      total += digit.to_i*2**two_power
+
+      two_power += 1
+    end
+    return total%4 == 0 
+  else 
+    return false
+  end
 end
 
 # Part 3
@@ -77,5 +90,5 @@ class BookInStock
 end
 
 
-book = BookInStock.new("sdfsdf", 23.3)
-puts book.price_as_string
+test = ""
+puts binary_multiple_of_4? test
